@@ -1,0 +1,23 @@
+<section class="admin-title-row">
+  <div>
+    <p class="admin-kicker">Experience and education</p>
+    <h1>Timeline</h1>
+  </div>
+  <%= link_to "New entry", new_admin_timeline_entry_path, class: "admin-button" %>
+</section>
+
+<div class="admin-list">
+  <% @timeline_entries.each do |entry| %>
+    <article class="admin-list-item">
+      <div>
+        <p><%= entry.category %> / <%= entry.sort_order %></p>
+        <h2><%= entry.title %></h2>
+        <span><%= entry.meta_with_timeframe %></span>
+      </div>
+      <div class="admin-actions">
+        <%= link_to "Edit", edit_admin_timeline_entry_path(entry) %>
+        <%= button_to "Delete", admin_timeline_entry_path(entry), method: :delete, form: { data: { confirm_modal: "Delete this entry?" } } %>
+      </div>
+    </article>
+  <% end %>
+</div>

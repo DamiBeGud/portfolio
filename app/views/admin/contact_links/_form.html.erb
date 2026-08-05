@@ -1,0 +1,7 @@
+<%= render "admin/shared/errors", record: contact_link %>
+
+<%= form_with model: [:admin, contact_link], class: "admin-form admin-form--wide", id: local_assigns.fetch(:form_id, "contact-link-form") do |form| %>
+  <label><span>Label</span><%= form.text_field :label %></label>
+  <label><span>URL</span><%= form.url_field :url %></label>
+  <label><span>Sort order</span><%= form.number_field :sort_order %></label>
+<% end %>

@@ -1,0 +1,33 @@
+<section class="admin-title-row">
+  <div>
+    <p class="admin-kicker">Section 02</p>
+    <h1>Projects</h1>
+  </div>
+  <div class="admin-title-actions">
+    <button class="admin-button" type="submit" form="projects-section-form">Save projects copy</button>
+    <%= link_to "New project", new_admin_project_path, class: "admin-button admin-button--secondary" %>
+  </div>
+</section>
+
+<%= render "admin/shared/errors", record: @settings %>
+
+<%= form_with model: @settings, url: admin_projects_section_path, method: :patch, class: "admin-form admin-form--wide", id: "projects-section-form" do |form| %>
+  <fieldset>
+    <legend>Projects copy</legend>
+    <label><span>Section kicker</span><%= form.text_field :projects_kicker %></label>
+    <label><span>Section title</span><%= form.text_area :projects_title, rows: 3 %></label>
+    <label><span>Section body</span><%= form.text_area :projects_body, rows: 5 %></label>
+  </fieldset>
+<% end %>
+
+<section class="admin-related">
+  <div class="admin-related__header">
+    <div>
+      <p class="admin-kicker">Projects content</p>
+      <h2>Project cards</h2>
+    </div>
+    <%= link_to "Add project", new_admin_project_path, class: "admin-button" %>
+  </div>
+
+  <%= render "projects_list", projects: @projects %>
+</section>

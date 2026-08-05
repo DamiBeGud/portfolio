@@ -1,0 +1,26 @@
+<section class="admin-title-row">
+  <div>
+    <p class="admin-kicker">Section 00</p>
+    <h1>Home</h1>
+  </div>
+  <button class="admin-button" type="submit" form="home-section-form">Save home section</button>
+</section>
+
+<%= render "admin/shared/errors", record: @settings %>
+
+<%= form_with model: @settings, url: admin_home_section_path, class: "admin-form admin-form--wide", id: "home-section-form" do |form| %>
+  <fieldset>
+    <legend>Page identity</legend>
+    <label><span>Brand mark</span><%= form.text_field :brand %></label>
+    <label><span>Browser title</span><%= form.text_field :page_title %></label>
+    <label><span>Meta description</span><%= form.text_area :meta_description, rows: 3 %></label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Hero content</legend>
+    <label><span>Role eyebrow</span><%= form.text_field :role %></label>
+    <label><span>Hero title</span><%= form.text_field :hero_title %></label>
+    <label><span>Hero intro</span><%= form.text_area :hero_intro, rows: 4 %></label>
+    <label><span>Hero body</span><%= form.text_area :hero_body, rows: 4 %></label>
+  </fieldset>
+<% end %>

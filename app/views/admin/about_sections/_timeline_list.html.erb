@@ -1,0 +1,35 @@
+<div class="admin-list" id="timeline-list">
+  <p class="admin-list-heading">Experience</p>
+  <% experience_entries.each do |entry| %>
+    <article class="admin-list-item">
+      <div>
+        <p><%= entry.category %> / <%= entry.sort_order %></p>
+        <h2><%= entry.title %></h2>
+        <span><%= entry.meta_with_timeframe %></span>
+      </div>
+      <div class="admin-actions">
+        <%= button_to "Up", move_higher_admin_timeline_entry_path(entry), method: :patch, class: "admin-button--secondary" %>
+        <%= button_to "Down", move_lower_admin_timeline_entry_path(entry), method: :patch, class: "admin-button--secondary" %>
+        <%= link_to "Edit", edit_admin_timeline_entry_path(entry) %>
+        <%= button_to "Delete", admin_timeline_entry_path(entry), method: :delete, form: { data: { confirm_modal: "Delete this entry?" } } %>
+      </div>
+    </article>
+  <% end %>
+
+  <p class="admin-list-heading">Education</p>
+  <% education_entries.each do |entry| %>
+    <article class="admin-list-item">
+      <div>
+        <p><%= entry.category %> / <%= entry.sort_order %></p>
+        <h2><%= entry.title %></h2>
+        <span><%= entry.meta_with_timeframe %></span>
+      </div>
+      <div class="admin-actions">
+        <%= button_to "Up", move_higher_admin_timeline_entry_path(entry), method: :patch, class: "admin-button--secondary" %>
+        <%= button_to "Down", move_lower_admin_timeline_entry_path(entry), method: :patch, class: "admin-button--secondary" %>
+        <%= link_to "Edit", edit_admin_timeline_entry_path(entry) %>
+        <%= button_to "Delete", admin_timeline_entry_path(entry), method: :delete, form: { data: { confirm_modal: "Delete this entry?" } } %>
+      </div>
+    </article>
+  <% end %>
+</div>

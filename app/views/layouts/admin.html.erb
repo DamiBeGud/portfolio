@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Portfolio Admin</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <%= stylesheet_link_tag :admin, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body class="admin-body">
+    <header class="admin-header">
+      <div></div>
+      <nav class="admin-utility-nav">
+        <%= link_to "View site", root_path %>
+        <% if session[:admin_authenticated] %>
+          <%= button_to "Sign out", admin_session_path, method: :delete, class: "link-button" %>
+        <% end %>
+      </nav>
+    </header>
+
+    <div class="admin-layout">
+      <% if session[:admin_authenticated] %>
+        <aside class="admin-sidebar" aria-label="Admin sections">
+          <nav>
+            <%= link_to "Overview", admin_root_path, class: ("is-current" if current_page?(admin_root_path)) %>
+            <%= link_to "Home", edit_admin_home_section_path, class: ("is-current" if current_page?(edit_admin_home_section_path)) %>
+            <%= link_to "About", edit_admin_about_section_path, class: ("is-current" if current_page?(edit_admin_about_section_path) || controller_path.in?(["admin/timeline_entries", "admin/info_cards"])) %>
+            <%= link_to "Projects", admin_projects_path, class: ("is-current" if controller_path == "admin/projects") %>
+            <%= link_to "Contact", edit_admin_contact_section_path, class: ("is-current" if current_page?(edit_admin_contact_section_path) || controller_path == "admin/contact_links") %>
+            <%= link_to "Settings", edit_admin_settings_path, class: ("is-current" if current_page?(edit_admin_settings_path)) %>
+          </nav>
+        </aside>
+      <% end %>
+
+      <main class="admin-shell">
+        <%= render "admin/shared/flashes" %>
+        <%= yield %>
+      </main>
+    </div>
+
+    <div class="admin-modal" data-confirm-modal-dialog hidden>
+      <div class="admin-modal__panel" role="dialog" aria-modal="true" aria-labelledby="admin-confirm-title">
+        <p class="admin-kicker">Confirm action</p>
+        <h2 id="admin-confirm-title">Are you sure?</h2>
+        <p data-confirm-modal-message>This action needs confirmation.</p>
+        <div class="admin-modal__actions">
+          <button type="button" class="admin-button admin-button--secondary" data-confirm-modal-cancel>Cancel</button>
+          <button type="button" class="admin-button" data-confirm-modal-confirm>Confirm</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

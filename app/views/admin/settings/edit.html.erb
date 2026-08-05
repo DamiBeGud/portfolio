@@ -1,0 +1,53 @@
+<section class="admin-title-row">
+  <div>
+    <p class="admin-kicker">Global controls</p>
+    <h1>Settings</h1>
+  </div>
+  <div class="admin-title-actions">
+    <button class="admin-button" type="submit" form="settings-form">Save settings</button>
+    <%= button_tag "Reset colors", type: "button", class: "admin-button admin-button--secondary", data: { confirm_modal: "Reset all light and dark colors to the default palette?", confirm_modal_url: reset_colors_admin_settings_path, confirm_modal_method: "patch" } %>
+  </div>
+</section>
+
+<%= render "admin/shared/errors", record: @settings %>
+
+<%= form_with model: @settings, url: admin_settings_path, class: "admin-form admin-form--wide", id: "settings-form" do |form| %>
+  <fieldset>
+    <legend>Visitor controls</legend>
+    <label class="admin-check">
+      <%= form.check_box :show_animation_toggle %>
+      <span>Show animation on/off toggle on the website</span>
+    </label>
+    <label class="admin-check">
+      <%= form.check_box :show_theme_toggle %>
+      <span>Show light/dark mode toggle on the website</span>
+    </label>
+    <label><span>Default color mode</span><%= form.select :theme_mode, SiteSetting::THEME_MODES.map { |mode| [mode.titleize, mode] } %></label>
+  </fieldset>
+
+  <fieldset>
+    <legend>Light colors</legend>
+    <% [:light_background, :light_text, :light_surface, :light_muted, :light_border].each do |field| %>
+      <div class="admin-color-row">
+        <label>
+          <span><%= field.to_s.humanize %> default <%= SiteSetting::DEFAULT_COLORS[field] %></span>
+          <%= form.color_field field %>
+        </label>
+        <%= button_tag "Reset", type: "button", class: "admin-button admin-button--secondary", data: { confirm_modal: "Reset #{field.to_s.humanize.downcase} to #{SiteSetting::DEFAULT_COLORS[field]}?", confirm_modal_url: reset_color_admin_settings_path(color_field: field), confirm_modal_method: "patch" } %>
+      </div>
+    <% end %>
+  </fieldset>
+
+  <fieldset>
+    <legend>Dark colors</legend>
+    <% [:dark_background, :dark_text, :dark_surface, :dark_muted, :dark_border].each do |field| %>
+      <div class="admin-color-row">
+        <label>
+          <span><%= field.to_s.humanize %> default <%= SiteSetting::DEFAULT_COLORS[field] %></span>
+          <%= form.color_field field %>
+        </label>
+        <%= button_tag "Reset", type: "button", class: "admin-button admin-button--secondary", data: { confirm_modal: "Reset #{field.to_s.humanize.downcase} to #{SiteSetting::DEFAULT_COLORS[field]}?", confirm_modal_url: reset_color_admin_settings_path(color_field: field), confirm_modal_method: "patch" } %>
+      </div>
+    <% end %>
+  </fieldset>
+<% end %>

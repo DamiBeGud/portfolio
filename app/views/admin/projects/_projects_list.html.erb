@@ -1,0 +1,21 @@
+<div class="admin-list" id="projects-list">
+  <% projects.each do |project| %>
+    <article class="admin-list-item">
+      <div>
+        <p><%= project.sort_order %></p>
+        <h2><%= project.title %></h2>
+        <span><%= project.technology_list.join(", ") %></span>
+        <div class="admin-inline-links">
+          <% if project.live_url.present? %><%= link_to "Live URL", external_url(project.live_url), target: "_blank", rel: "noreferrer", class: "admin-inline-link" %><% end %>
+          <% if project.source_url.present? %><%= link_to "Source URL", external_url(project.source_url), target: "_blank", rel: "noreferrer", class: "admin-inline-link" %><% end %>
+        </div>
+      </div>
+      <div class="admin-actions">
+        <%= button_to "Up", move_higher_admin_project_path(project), method: :patch, class: "admin-button--secondary" %>
+        <%= button_to "Down", move_lower_admin_project_path(project), method: :patch, class: "admin-button--secondary" %>
+        <%= link_to "Edit", edit_admin_project_path(project) %>
+        <%= button_to "Delete", admin_project_path(project), method: :delete, form: { data: { confirm_modal: "Delete this project?" } } %>
+      </div>
+    </article>
+  <% end %>
+</div>

@@ -1,0 +1,44 @@
+<section class="admin-title-row">
+  <div>
+    <p class="admin-kicker">Section 03</p>
+    <h1>Contact</h1>
+  </div>
+  <button class="admin-button" type="submit" form="contact-section-form">Save contact section</button>
+</section>
+
+<%= render "admin/shared/errors", record: @settings %>
+
+<%= form_with model: @settings, url: admin_contact_section_path, class: "admin-form admin-form--wide", id: "contact-section-form" do |form| %>
+  <fieldset>
+    <legend>Contact copy</legend>
+    <label><span>Section kicker</span><%= form.text_field :contact_kicker %></label>
+    <label><span>Section title</span><%= form.text_area :contact_title, rows: 3 %></label>
+    <label><span>Email address</span><%= form.email_field :contact_email %></label>
+  </fieldset>
+<% end %>
+
+<section class="admin-related">
+  <div class="admin-related__header">
+    <div>
+      <p class="admin-kicker">Contact content</p>
+      <h2>Social links</h2>
+    </div>
+    <%= link_to "Add contact link", new_admin_contact_link_path, class: "admin-button" %>
+  </div>
+
+  <div class="admin-list">
+    <% @contact_links.each do |link| %>
+      <article class="admin-list-item">
+        <div>
+          <p><%= link.sort_order %></p>
+          <h2><%= link.label %></h2>
+          <%= link_to link.url, external_url(link.url), target: "_blank", rel: "noreferrer", class: "admin-inline-link" %>
+        </div>
+        <div class="admin-actions">
+          <%= link_to "Edit", edit_admin_contact_link_path(link) %>
+          <%= button_to "Delete", admin_contact_link_path(link), method: :delete, form: { data: { confirm_modal: "Delete this link?" } } %>
+        </div>
+      </article>
+    <% end %>
+  </div>
+</section>

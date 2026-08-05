@@ -1,0 +1,23 @@
+<section class="admin-title-row">
+  <div>
+    <p class="admin-kicker">Capabilities</p>
+    <h1>Info Cards</h1>
+  </div>
+  <%= link_to "New card", new_admin_info_card_path, class: "admin-button" %>
+</section>
+
+<div class="admin-list">
+  <% @info_cards.each do |card| %>
+    <article class="admin-list-item">
+      <div>
+        <p><%= card.sort_order %></p>
+        <h2><%= card.title %></h2>
+        <span><%= card.tag_list.presence&.join(", ") || truncate(card.body, length: 90) %></span>
+      </div>
+      <div class="admin-actions">
+        <%= link_to "Edit", edit_admin_info_card_path(card) %>
+        <%= button_to "Delete", admin_info_card_path(card), method: :delete, form: { data: { confirm_modal: "Delete this card?" } } %>
+      </div>
+    </article>
+  <% end %>
+</div>

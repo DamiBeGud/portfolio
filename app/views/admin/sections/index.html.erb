@@ -1,0 +1,15 @@
+<section class="admin-title-row">
+  <div>
+    <p class="admin-kicker">Portfolio editor</p>
+    <h1>Edit by page section</h1>
+  </div>
+</section>
+
+<div class="admin-section-grid">
+  <% @sections.each do |title, description, path| %>
+    <%= link_to path, class: "admin-section-card" do %>
+      <h2><%= title %></h2>
+      <p><%= description %></p>
+    <% end %>
+  <% end %>
+</div>

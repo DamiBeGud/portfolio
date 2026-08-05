@@ -1,0 +1,24 @@
+<%= render "admin/shared/errors", record: project %>
+
+<%= form_with model: [:admin, project], class: "admin-form admin-form--wide", id: local_assigns.fetch(:form_id, "project-form") do |form| %>
+  <label><span>Title</span><%= form.text_field :title %></label>
+  <label><span>Description</span><%= form.text_area :description, rows: 5 %></label>
+  <label><span>Technologies, comma separated</span><%= form.text_field :technologies %></label>
+  <label><span>Live URL</span><%= form.url_field :live_url %></label>
+  <label><span>Source URL</span><%= form.url_field :source_url %></label>
+  <label>
+    <span>
+      Preview style
+      <button class="admin-tooltip" type="button" aria-label="Preview style help">
+        ?
+        <span class="admin-tooltip__content" role="tooltip">Used only when no project image is uploaded. Default is light, inverse is dark, grid is a simple cross/grid preview.</span>
+      </button>
+    </span>
+    <%= form.select :preview_style, Project::PREVIEW_STYLES.map { |style| [style.titleize, style] } %>
+  </label>
+  <label><span>Sort order</span><%= form.number_field :sort_order %></label>
+  <label><span>Project image</span><%= form.file_field :image, accept: "image/*" %></label>
+  <% if project.image.attached? %>
+    <div class="admin-image-preview"><%= image_tag project.image, alt: "" %></div>
+  <% end %>
+<% end %>

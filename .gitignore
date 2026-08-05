@@ -1,0 +1,41 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Rails
+/log/*
+!/log/.keep
+/tmp/*
+!/tmp/.keep
+/storage/*
+!/storage/.keep
+/public/assets
+/public/packs
+/public/packs-test
+/node_modules
+
+# Databases and local state
+/db/*.sqlite3
+/db/*.sqlite3-*
+/db/schema_cache.yml
+
+# Credentials and secrets
+/config/master.key
+/config/credentials/*.key
+
+# Bundler
+/.bundle
+/vendor/bundle
+
+# Docker and runtime files
+/.docker-data
+*.pid
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea
+.vscode
+*.swp
+*.swo

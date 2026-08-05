@@ -1,0 +1,8 @@
+<%= render "admin/shared/errors", record: info_card %>
+
+<%= form_with model: [:admin, info_card], class: "admin-form admin-form--wide", id: local_assigns.fetch(:form_id, "info-card-form") do |form| %>
+  <label><span>Title</span><%= form.text_field :title %></label>
+  <label><span>Body</span><%= form.text_area :body, rows: 5 %></label>
+  <label><span>Tags, comma separated. Leave blank to show body text.</span><%= form.text_field :tags %></label>
+  <label><span>Sort order</span><%= form.number_field :sort_order %></label>
+<% end %>

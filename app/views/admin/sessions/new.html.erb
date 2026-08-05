@@ -1,0 +1,12 @@
+<section class="admin-card admin-card--narrow">
+  <h1>Admin Login</h1>
+  <p>Use the password from <code>ADMIN_PASSWORD</code>.</p>
+
+  <%= form_with url: admin_session_path, class: "admin-form" do |form| %>
+    <label>
+      <span>Password</span>
+      <%= form.password_field :password, required: true, autocomplete: "current-password" %>
+    </label>
+    <%= form.submit "Sign in" %>
+  <% end %>
+</section>

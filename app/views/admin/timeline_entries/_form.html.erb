@@ -1,0 +1,19 @@
+<%= render "admin/shared/errors", record: timeline_entry %>
+
+<%= form_with model: [:admin, timeline_entry], class: "admin-form admin-form--wide", id: local_assigns.fetch(:form_id, "timeline-entry-form") do |form| %>
+  <label><span>Category</span><%= form.select :category, TimelineEntry::CATEGORIES.map { |category| [category.titleize, category] } %></label>
+  <label><span>Meta</span><%= form.text_field :meta %></label>
+  <label><span>Title</span><%= form.text_field :title %></label>
+  <label><span>Description</span><%= form.text_area :description, rows: 5 %></label>
+  <fieldset>
+    <legend>Timeframe</legend>
+    <label><span>Start month</span><%= form.select :start_month, TimelineEntry::MONTHS, { include_blank: "Month" } %></label>
+    <label><span>Start year</span><%= form.number_field :start_year, min: 1900, max: 2200, placeholder: "2024" %></label>
+    <label><span>End month</span><%= form.select :end_month, TimelineEntry::MONTHS, { include_blank: "Month" } %></label>
+    <label><span>End year</span><%= form.number_field :end_year, min: 1900, max: 2200, placeholder: "2026" %></label>
+    <label class="admin-check">
+      <%= form.check_box :current %>
+      <span>Present</span>
+    </label>
+  </fieldset>
+<% end %>

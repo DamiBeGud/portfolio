@@ -1,0 +1,56 @@
+<section class="admin-title-row">
+  <div>
+    <p class="admin-kicker">Section 01</p>
+    <h1>About</h1>
+  </div>
+  <button class="admin-button" type="submit" form="about-section-form">Save about section</button>
+</section>
+
+<%= render "admin/shared/errors", record: @settings %>
+
+<%= form_with model: @settings, url: admin_about_section_path, class: "admin-form admin-form--wide", id: "about-section-form" do |form| %>
+  <fieldset>
+    <legend>About section</legend>
+    <label><span>Section kicker</span><%= form.text_field :about_kicker %></label>
+    <label><span>Section title</span><%= form.text_area :about_title, rows: 3 %></label>
+    <label><span>Section body</span><%= form.text_area :about_body, rows: 5 %></label>
+  </fieldset>
+<% end %>
+
+<section class="admin-related" id="timeline">
+  <div class="admin-related__header">
+    <div>
+      <p class="admin-kicker">About content</p>
+      <h2>Timeline</h2>
+    </div>
+    <%= link_to "Add timeline entry", new_admin_timeline_entry_path, class: "admin-button" %>
+  </div>
+
+  <%= render "timeline_list", experience_entries: @experience_entries, education_entries: @education_entries %>
+</section>
+
+<section class="admin-related">
+  <div class="admin-related__header">
+    <div>
+      <p class="admin-kicker">About content</p>
+      <h2>Info Cards</h2>
+    </div>
+    <%= link_to "Add info card", new_admin_info_card_path, class: "admin-button" %>
+  </div>
+
+  <div class="admin-list">
+    <% @info_cards.each do |card| %>
+      <article class="admin-list-item">
+        <div>
+          <p><%= card.sort_order %></p>
+          <h2><%= card.title %></h2>
+          <span><%= card.tag_list.presence&.join(", ") || truncate(card.body, length: 90) %></span>
+        </div>
+        <div class="admin-actions">
+          <%= link_to "Edit", edit_admin_info_card_path(card) %>
+          <%= button_to "Delete", admin_info_card_path(card), method: :delete, form: { data: { confirm_modal: "Delete this card?" } } %>
+        </div>
+      </article>
+    <% end %>
+  </div>
+</section>

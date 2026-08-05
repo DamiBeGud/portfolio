@@ -1,0 +1,23 @@
+<section class="admin-title-row">
+  <div>
+    <p class="admin-kicker">External links</p>
+    <h1>Contact Links</h1>
+  </div>
+  <%= link_to "New link", new_admin_contact_link_path, class: "admin-button" %>
+</section>
+
+<div class="admin-list">
+  <% @contact_links.each do |link| %>
+    <article class="admin-list-item">
+      <div>
+        <p><%= link.sort_order %></p>
+        <h2><%= link.label %></h2>
+        <%= link_to link.url, external_url(link.url), target: "_blank", rel: "noreferrer", class: "admin-inline-link" %>
+      </div>
+      <div class="admin-actions">
+        <%= link_to "Edit", edit_admin_contact_link_path(link) %>
+        <%= button_to "Delete", admin_contact_link_path(link), method: :delete, form: { data: { confirm_modal: "Delete this link?" } } %>
+      </div>
+    </article>
+  <% end %>
+</div>

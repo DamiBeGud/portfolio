@@ -1,0 +1,570 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Space Grotesk", sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.06em;
+  line-height: 0.95;
+}
+
+h1 {
+  margin-bottom: 1.1rem;
+  font-size: clamp(2.7rem, 8vw, 7rem);
+}
+
+h2 {
+  margin-bottom: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--black);
+  outline-offset: 5px;
+}
+
+.admin-body {
+  --black: #10100e;
+  --white: #f4f1e8;
+  --surface: #fffaf0;
+  --border-color: #10100e;
+  --sidebar-width: 15rem;
+  --admin-header-height: 5.5rem;
+  background: var(--white);
+  color: var(--black);
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: var(--admin-header-height);
+  margin-left: 0;
+  padding: 1rem clamp(1rem, 3vw, 2rem);
+  border-bottom: 1px solid var(--border-color);
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.admin-header p {
+  margin: 0.4rem 0 0;
+  color: rgba(16, 16, 14, 0.64);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.admin-brand,
+.admin-button,
+.admin-utility-nav a,
+.admin-utility-nav button,
+.admin-actions a,
+.admin-actions button,
+.admin-form input[type="submit"] {
+  border: 1px solid var(--border-color);
+  background: var(--black);
+  color: var(--white);
+  padding: 0.7rem 0.9rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.admin-button--secondary {
+  background: #fffaf0;
+  color: var(--black);
+}
+
+.admin-brand {
+  display: inline-block;
+  font-weight: 700;
+}
+
+.admin-utility-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.admin-utility-nav form {
+  margin: 0;
+}
+
+.admin-layout {
+  display: block;
+  min-height: calc(100vh - var(--admin-header-height));
+  margin-left: var(--sidebar-width);
+}
+
+.admin-sidebar {
+  position: fixed;
+  inset: var(--admin-header-height) auto 0 0;
+  z-index: 40;
+  width: var(--sidebar-width);
+  padding: 1rem;
+  border-right: 1px solid var(--border-color);
+  background: var(--surface);
+  overflow-y: auto;
+}
+
+.admin-sidebar nav {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.admin-sidebar a {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid rgba(16, 16, 14, 0.2);
+  background: var(--surface);
+  color: var(--black);
+  padding: 0.85rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.82rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.admin-sidebar a:hover,
+.admin-sidebar a.is-current {
+  background: var(--black);
+  color: var(--white);
+}
+
+.admin-shell {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem) 0;
+}
+
+.admin-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-title-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.admin-kicker {
+  margin-bottom: 0.4rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+}
+
+.admin-section-grid,
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.admin-section-card,
+.admin-stat,
+.admin-card,
+.admin-list-item,
+.admin-related,
+.admin-form fieldset,
+.admin-errors,
+.flash {
+  border: 1px solid var(--border-color);
+  background: rgba(255, 250, 240, 0.78);
+  box-shadow: 0 1.2rem 3rem rgba(16, 16, 14, 0.08);
+}
+
+.admin-section-card {
+  min-height: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1rem, 2.4vw, 1.6rem);
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    background 180ms ease;
+}
+
+.admin-section-card:hover {
+  transform: translateY(-0.25rem);
+  background: #fffaf0;
+}
+
+.admin-section-card span {
+  width: fit-content;
+  border: 1px solid var(--border-color);
+  padding: 0.42rem 0.62rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.admin-section-card h2 {
+  margin: auto 0 1rem;
+  font-size: clamp(2rem, 5vw, 4.6rem);
+}
+
+.admin-section-card p {
+  max-width: 28rem;
+}
+
+.admin-stat {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1.4rem;
+  text-decoration: none;
+}
+
+.admin-stat strong {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 0.9;
+}
+
+.admin-card,
+.admin-list-item,
+.admin-related,
+.admin-form fieldset,
+.admin-errors,
+.flash {
+  padding: 1rem;
+}
+
+.admin-card--narrow {
+  max-width: 32rem;
+}
+
+.admin-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.admin-list-heading {
+  margin: 1rem 0 0.2rem;
+  border-bottom: 1px solid rgba(16, 16, 14, 0.24);
+  padding-bottom: 0.35rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.admin-related {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.admin-related__header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.admin-related__header h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+}
+
+.admin-list-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.admin-list-item h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.3rem);
+}
+
+.admin-list-item p,
+.admin-list-item span {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8rem;
+}
+
+.admin-inline-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.65rem;
+}
+
+.admin-inline-link {
+  display: inline-block;
+  color: var(--black);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  gap: 0.5rem;
+}
+
+.admin-actions form {
+  margin: 0;
+}
+
+.admin-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.admin-form--wide {
+  max-width: 58rem;
+}
+
+.admin-form fieldset {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+}
+
+.admin-form legend {
+  padding: 0 0.4rem;
+  font-family: "IBM Plex Mono", monospace;
+  text-transform: uppercase;
+}
+
+.admin-form label {
+  display: grid;
+  gap: 0.35rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+}
+
+.admin-form .admin-check {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid rgba(16, 16, 14, 0.2);
+  background: rgba(255, 250, 240, 0.62);
+  padding: 0.85rem;
+}
+
+.admin-tooltip {
+  position: relative;
+  display: inline-grid;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: 0.35rem;
+  place-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--black);
+  cursor: help;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.admin-tooltip__content {
+  position: absolute;
+  bottom: calc(100% + 0.6rem);
+  left: 50%;
+  z-index: 20;
+  width: min(18rem, 80vw);
+  transform: translateX(-50%) translateY(0.25rem);
+  border: 1px solid var(--border-color);
+  background: var(--black);
+  color: var(--white);
+  padding: 0.7rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.86rem;
+  line-height: 1.35;
+  opacity: 0;
+  pointer-events: none;
+  text-align: left;
+  text-transform: none;
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
+}
+
+.admin-tooltip:hover .admin-tooltip__content,
+.admin-tooltip:focus-visible .admin-tooltip__content {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.admin-form .admin-check input {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.admin-form input,
+.admin-form textarea,
+.admin-form select {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  background: #fffaf0;
+  color: var(--black);
+  padding: 0.82rem;
+}
+
+.admin-form input[type="color"] {
+  min-height: 3rem;
+  padding: 0.2rem;
+}
+
+.admin-form input[type="submit"] {
+  width: fit-content;
+}
+
+.admin-color-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: end;
+}
+
+.admin-color-row form {
+  margin: 0;
+}
+
+.admin-modal[hidden],
+[data-confirm-modal-dialog][hidden] {
+  display: none;
+}
+
+.admin-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(16, 16, 14, 0.46);
+  backdrop-filter: blur(10px);
+}
+
+.admin-modal__panel {
+  width: min(100%, 34rem);
+  border: 1px solid var(--border-color);
+  background: var(--surface);
+  padding: clamp(1.2rem, 3vw, 2rem);
+  box-shadow: 0 2rem 5rem rgba(16, 16, 14, 0.28);
+}
+
+.admin-modal__panel h2 {
+  margin-bottom: 0.75rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.admin-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.admin-modal-open {
+  overflow: hidden;
+}
+
+.admin-image-preview img {
+  max-width: 22rem;
+  width: 100%;
+  border: 1px solid var(--border-color);
+}
+
+.flash--notice {
+  border-color: #286140;
+}
+
+.flash--alert,
+.admin-errors {
+  border-color: #9c2f2f;
+}
+
+@media (max-width: 860px) {
+  .admin-body {
+    --sidebar-width: 100%;
+  }
+
+  .admin-header {
+    margin-left: 0;
+  }
+
+  .admin-sidebar {
+    position: static;
+    width: 100%;
+    border-right: 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .admin-sidebar nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-layout,
+  .admin-section-grid,
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-layout {
+    margin-left: 0;
+  }
+
+  .admin-title-row,
+  .admin-title-actions,
+  .admin-list-item,
+  .admin-related__header,
+  .admin-color-row,
+  .admin-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

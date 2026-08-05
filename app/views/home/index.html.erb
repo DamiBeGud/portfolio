@@ -1,0 +1,170 @@
+<% content_for :title, @settings.page_title %>
+<% content_for :meta_description, @settings.meta_description %>
+<% content_for :body_class, "theme-#{@settings.theme_mode}" %>
+
+<style>
+  :root {
+    --light-background: <%= @settings.light_background %>;
+    --light-text: <%= @settings.light_text %>;
+    --light-surface: <%= @settings.light_surface %>;
+    --light-muted: <%= @settings.light_muted %>;
+    --light-border: <%= @settings.light_border %>;
+    --dark-background: <%= @settings.dark_background %>;
+    --dark-text: <%= @settings.dark_text %>;
+    --dark-surface: <%= @settings.dark_surface %>;
+    --dark-muted: <%= @settings.dark_muted %>;
+    --dark-border: <%= @settings.dark_border %>;
+  }
+</style>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="site-header" data-nav-state="home">
+  <p class="brand" aria-label="Portfolio owner"><%= @settings.brand %></p>
+  <div class="header-actions">
+    <% if session[:admin_authenticated] %>
+      <%= link_to "Admin", admin_root_path, class: "admin-return-link" %>
+    <% end %>
+    <% if @settings.show_theme_toggle? %>
+      <button class="theme-toggle" type="button" aria-label="Switch color mode">
+        <span class="theme-toggle__label">Theme</span>
+        <span class="theme-toggle__state">Auto</span>
+      </button>
+    <% end %>
+    <% if @settings.show_animation_toggle? %>
+      <button class="motion-toggle" type="button" aria-pressed="true" aria-label="Disable animations">
+        <span class="motion-toggle__label">Animations</span>
+        <span class="motion-toggle__state">On</span>
+      </button>
+    <% end %>
+  </div>
+</header>
+
+<nav class="primary-nav" aria-label="Primary navigation" data-nav-state="home">
+  <ul>
+    <li><a href="#home" data-page-link>Home</a></li>
+    <li><a href="#about" data-page-link>About Me</a></li>
+    <li><a href="#projects" data-page-link>Projects</a></li>
+    <li><a href="#contact" data-page-link>Contact</a></li>
+  </ul>
+</nav>
+
+<main id="main-content">
+  <section class="hero" id="home" aria-labelledby="hero-title">
+    <div class="hero__frame">
+      <p class="eyebrow"><%= @settings.role %></p>
+      <h1 id="hero-title"><%= @settings.hero_title %></h1>
+      <p><%= @settings.hero_intro %></p>
+      <p><%= @settings.hero_body %></p>
+    </div>
+  </section>
+
+  <section class="page-panel about-panel" id="about" aria-labelledby="about-title" data-page>
+    <div class="section-kicker"><%= @settings.about_kicker %></div>
+    <div class="page-grid">
+      <div><h2 id="about-title"><%= @settings.about_title %></h2></div>
+      <div class="copy-stack"><p><%= @settings.about_body %></p></div>
+    </div>
+
+    <div class="timeline-grid" aria-label="Work experience and education">
+      <section class="timeline-block reveal" aria-labelledby="experience-title">
+        <p class="eyebrow">Work Experience</p>
+        <h3 id="experience-title">Professional Experience</h3>
+        <ol class="timeline-list">
+          <% @experience_entries.each do |entry| %>
+            <li>
+              <span class="timeline-meta"><%= entry.meta_with_timeframe %></span>
+              <strong><%= entry.title %></strong>
+              <p><%= entry.description %></p>
+            </li>
+          <% end %>
+        </ol>
+      </section>
+
+      <section class="timeline-block reveal" aria-labelledby="education-title">
+        <p class="eyebrow">Education</p>
+        <h3 id="education-title">University</h3>
+        <ol class="timeline-list">
+          <% @education_entries.each do |entry| %>
+            <li>
+              <span class="timeline-meta"><%= entry.meta_with_timeframe %></span>
+              <strong><%= entry.title %></strong>
+              <p><%= entry.description %></p>
+            </li>
+          <% end %>
+        </ol>
+      </section>
+    </div>
+
+    <div class="cards-grid" aria-label="Developer capabilities">
+      <% @info_cards.each do |card| %>
+        <article class="info-card reveal">
+          <h3><%= card.title %></h3>
+          <% if card.tag_list.any? %>
+            <ul class="tag-list">
+              <% card.tag_list.each do |tag| %><li><%= tag %></li><% end %>
+            </ul>
+          <% else %>
+            <p><%= card.body %></p>
+          <% end %>
+        </article>
+      <% end %>
+    </div>
+  </section>
+
+  <section class="page-panel projects-panel" id="projects" aria-labelledby="projects-title" data-page>
+    <div class="section-kicker"><%= @settings.projects_kicker %></div>
+    <div class="page-grid">
+      <div><h2 id="projects-title"><%= @settings.projects_title %></h2></div>
+      <p><%= @settings.projects_body %></p>
+    </div>
+
+    <div class="project-stage" data-project-stage>
+      <% @projects.each.with_index(1) do |project, index| %>
+        <article class="project-card" data-project-card>
+          <% preview_class = ["project-preview", ("project-preview--#{project.preview_style}" unless project.preview_style == "default")].compact.join(" ") %>
+          <div class="<%= preview_class %>" aria-hidden="true">
+            <% if project.image.attached? %>
+              <%= image_tag project.image, alt: "", loading: "lazy" %>
+            <% else %>
+              <span></span><span></span><span></span>
+            <% end %>
+          </div>
+          <div class="project-copy">
+            <p class="project-number"><%= index.to_s.rjust(2, "0") %></p>
+            <h3><%= project.title %></h3>
+            <p><%= project.description %></p>
+            <ul class="tag-list" aria-label="Technologies used">
+              <% project.technology_list.each do |technology| %><li><%= technology %></li><% end %>
+            </ul>
+            <div class="project-links">
+              <% if project.live_url.present? %><%= link_to "Live Website", external_url(project.live_url), target: "_blank", rel: "noreferrer" %><% end %>
+              <% if project.source_url.present? %><%= link_to "Source Code", external_url(project.source_url), target: "_blank", rel: "noreferrer" %><% end %>
+            </div>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  </section>
+
+  <section class="page-panel contact-panel" id="contact" aria-labelledby="contact-title" data-page>
+    <div class="section-kicker"><%= @settings.contact_kicker %></div>
+    <div class="page-grid">
+      <div><h2 id="contact-title"><%= @settings.contact_title %></h2></div>
+      <div class="contact-list" aria-label="Contact links">
+        <%= mail_to @settings.contact_email %>
+        <% @contact_links.each do |link| %>
+          <%= link_to link.label, external_url(link.url), target: "_blank", rel: "noreferrer" %>
+        <% end %>
+      </div>
+    </div>
+
+    <form class="contact-form" action="mailto:<%= @settings.contact_email %>" method="post" enctype="text/plain">
+      <label><span>Name</span><input name="name" autocomplete="name" required></label>
+      <label><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
+      <label><span>Message</span><textarea name="message" rows="5" required></textarea></label>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+</main>
