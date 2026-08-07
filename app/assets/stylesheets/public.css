@@ -9,6 +9,7 @@
   --grey-500: var(--light-muted, #696963);
   --grey-800: color-mix(in srgb, var(--black) 86%, var(--white));
   --border-color: var(--light-border, #050505);
+  --grid-line: var(--light-grid-thickness, 1px);
   --max-width: 1180px;
   --side-nav-width: 190px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -27,6 +28,7 @@ body.is-dark {
   --grey-500: var(--dark-muted, #a7a7a0);
   --grey-800: color-mix(in srgb, var(--black) 86%, var(--white));
   --border-color: var(--dark-border, #f8f8f5);
+  --grid-line: var(--dark-grid-thickness, 1px);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -41,6 +43,7 @@ body.is-dark {
     --grey-500: var(--dark-muted, #a7a7a0);
     --grey-800: color-mix(in srgb, var(--black) 86%, var(--white));
     --border-color: var(--dark-border, #f8f8f5);
+    --grid-line: var(--dark-grid-thickness, 1px);
   }
 }
 
@@ -56,12 +59,19 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    linear-gradient(90deg, color-mix(in srgb, var(--black) 8%, transparent) 1px, transparent 1px) 0 0 / 64px 64px,
+    linear-gradient(color-mix(in srgb, var(--black) 8%, transparent) var(--grid-line), transparent var(--grid-line)) 0 0 / 64px 64px,
+    linear-gradient(90deg, color-mix(in srgb, var(--black) 8%, transparent) var(--grid-line), transparent var(--grid-line)) 0 0 / 64px 64px,
     radial-gradient(circle at 78% 8%, color-mix(in srgb, var(--black) 16%, transparent), transparent 24rem),
     var(--white);
   color: var(--black);
   font-family: "Space Grotesk", sans-serif;
   line-height: 1.5;
+}
+
+body.no-background-pattern {
+  background:
+    radial-gradient(circle at 78% 8%, color-mix(in srgb, var(--black) 16%, transparent), transparent 24rem),
+    var(--white);
 }
 
 body.animations-disabled,
@@ -114,8 +124,8 @@ select {
   z-index: -1;
   opacity: 0.34;
   background-image:
-    linear-gradient(color-mix(in srgb, var(--black) 7%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--black) 6%, transparent) 1px, transparent 1px);
+    linear-gradient(color-mix(in srgb, var(--black) 7%, transparent) var(--grid-line), transparent var(--grid-line)),
+    linear-gradient(90deg, color-mix(in srgb, var(--black) 6%, transparent) var(--grid-line), transparent var(--grid-line));
   background-size: 13px 13px;
 }
 
@@ -544,7 +554,7 @@ p {
   border: 1px solid var(--border-color);
   background:
     linear-gradient(135deg, var(--black) 0 34%, transparent 34% 100%),
-    repeating-linear-gradient(90deg, var(--grey-100) 0 1px, transparent 1px 24px),
+    repeating-linear-gradient(90deg, var(--grey-100) 0 var(--grid-line), transparent var(--grid-line) 24px),
     var(--grey-50);
 }
 
@@ -594,8 +604,8 @@ p {
 
 .project-preview--grid {
   background:
-    linear-gradient(var(--black), var(--black)) 50% 50% / 72% 1px no-repeat,
-    linear-gradient(90deg, var(--black), var(--black)) 50% 50% / 1px 72% no-repeat,
+    linear-gradient(var(--black), var(--black)) 50% 50% / 72% var(--grid-line) no-repeat,
+    linear-gradient(90deg, var(--black), var(--black)) 50% 50% / var(--grid-line) 72% no-repeat,
     var(--grey-50);
 }
 

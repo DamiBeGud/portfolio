@@ -1,6 +1,8 @@
 <% content_for :title, @settings.page_title %>
 <% content_for :meta_description, @settings.meta_description %>
-<% content_for :body_class, "theme-#{@settings.theme_mode}" %>
+<% body_classes = ["theme-#{@settings.theme_mode}"] %>
+<% body_classes << "no-background-pattern" unless @settings.background_pattern? %>
+<% content_for :body_class, body_classes.join(" ") %>
 
 <style>
   :root {
@@ -14,6 +16,8 @@
     --dark-surface: <%= @settings.dark_surface %>;
     --dark-muted: <%= @settings.dark_muted %>;
     --dark-border: <%= @settings.dark_border %>;
+    --light-grid-thickness: <%= @settings.light_grid_thickness %>px;
+    --dark-grid-thickness: <%= @settings.dark_grid_thickness %>px;
   }
 </style>
 

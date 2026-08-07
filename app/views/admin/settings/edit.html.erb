@@ -26,6 +26,16 @@
   </fieldset>
 
   <fieldset>
+    <legend>Background</legend>
+    <label class="admin-check">
+      <%= form.check_box :background_pattern %>
+      <span>Show the squared pattern on the website background</span>
+    </label>
+    <label><span>Grid line thickness — light theme (px)</span><%= form.number_field :light_grid_thickness, min: SiteSetting::GRID_THICKNESS_RANGE.min, max: SiteSetting::GRID_THICKNESS_RANGE.max, step: 1 %></label>
+    <label><span>Grid line thickness — dark theme (px)</span><%= form.number_field :dark_grid_thickness, min: SiteSetting::GRID_THICKNESS_RANGE.min, max: SiteSetting::GRID_THICKNESS_RANGE.max, step: 1 %></label>
+  </fieldset>
+
+  <fieldset>
     <legend>Light colors</legend>
     <% [:light_background, :light_text, :light_surface, :light_muted, :light_border].each do |field| %>
       <div class="admin-color-row">

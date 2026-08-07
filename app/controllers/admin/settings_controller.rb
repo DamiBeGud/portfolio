@@ -35,7 +35,8 @@ module Admin
 
     def settings_params
       params.require(:site_setting).permit(
-        :show_animation_toggle, :show_theme_toggle, :theme_mode, :light_background, :light_text,
+        :show_animation_toggle, :show_theme_toggle, :theme_mode, :background_pattern,
+        :light_grid_thickness, :dark_grid_thickness, :light_background, :light_text,
         :light_surface, :light_muted, :light_border, :dark_background,
         :dark_text, :dark_surface, :dark_muted, :dark_border
       )

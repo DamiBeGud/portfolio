@@ -1,5 +1,6 @@
 class SiteSetting < ApplicationRecord
   THEME_MODES = %w[system light dark].freeze
+  GRID_THICKNESS_RANGE = 1..8
   DEFAULT_COLORS = {
     light_background: "#f8f8f5",
     light_text: "#050505",
@@ -22,6 +23,8 @@ class SiteSetting < ApplicationRecord
   validates :light_background, :light_text, :light_surface, :light_muted,
     :light_border, :dark_background, :dark_text, :dark_surface, :dark_muted,
     :dark_border, format: { with: /\A#[0-9a-fA-F]{6}\z/ }
+  validates :light_grid_thickness, :dark_grid_thickness,
+    numericality: { only_integer: true, in: GRID_THICKNESS_RANGE }
 
   def self.current
     first_or_create!(default_attributes)
@@ -31,6 +34,9 @@ class SiteSetting < ApplicationRecord
     {
       show_animation_toggle: true,
       show_theme_toggle: true,
+      background_pattern: true,
+      light_grid_thickness: 1,
+      dark_grid_thickness: 1,
       **DEFAULT_COLORS,
       hero_intro: "A software developer focused on building reliable, maintainable applications across the web stack.",
       hero_body: "I enjoy turning product ideas into practical software, with attention to clean architecture, readable code, performance, and user experience.",

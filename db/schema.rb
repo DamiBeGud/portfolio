@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_06_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_07_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -78,6 +78,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_090000) do
     t.text "about_body", null: false
     t.string "about_kicker", default: "01 / About", null: false
     t.string "about_title", null: false
+    t.boolean "background_pattern", default: true, null: false
     t.string "brand", default: "DB", null: false
     t.string "contact_email", default: "developer@example.com", null: false
     t.string "contact_kicker", default: "03 / Contact", null: false
@@ -85,6 +86,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_090000) do
     t.datetime "created_at", null: false
     t.string "dark_background", default: "#050505", null: false
     t.string "dark_border", default: "#f8f8f5", null: false
+    t.integer "dark_grid_thickness", default: 1, null: false
     t.string "dark_muted", default: "#a7a7a0", null: false
     t.string "dark_surface", default: "#1c1c1a", null: false
     t.string "dark_text", default: "#f8f8f5", null: false
@@ -93,6 +95,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_090000) do
     t.string "hero_title", default: "Hi. I am Damjan Mlinaric", null: false
     t.string "light_background", default: "#f8f8f5", null: false
     t.string "light_border", default: "#050505", null: false
+    t.integer "light_grid_thickness", default: 1, null: false
     t.string "light_muted", default: "#696963", null: false
     t.string "light_surface", default: "#f8f8f5", null: false
     t.string "light_text", default: "#050505", null: false
