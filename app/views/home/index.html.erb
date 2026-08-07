@@ -139,7 +139,15 @@
 
     <div class="project-stage" data-project-stage>
       <% @projects.each.with_index(1) do |project, index| %>
-        <article class="project-card" data-project-card>
+        <article class="project-card"
+                 data-project-card
+                 data-project-title="<%= project.title %>"
+                 data-project-description="<%= project.description %>"
+                 data-project-technologies="<%= project.technology_list.join(", ") %>"
+                 data-project-live-url="<%= project.live_url %>"
+                 data-project-source-url="<%= project.source_url %>"
+                 data-project-index="<%= index %>"
+                 <% if project.image.attached? %>data-project-image-url="<%= url_for(project.image) %>"<% end %>>
           <% preview_class = ["project-preview", ("project-preview--#{project.preview_style}" unless project.preview_style == "default")].compact.join(" ") %>
           <div class="<%= preview_class %>" aria-hidden="true">
             <% if project.image.attached? %>
@@ -195,4 +203,11 @@
       <%= form.button "Send Message", type: "submit" %>
     <% end %>
   </section>
+
+  <div id="project-detail" class="project-detail" aria-hidden="true">
+    <button class="project-detail__close" type="button" aria-label="Close project detail">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="project-detail__content"></div>
+  </div>
 </main>
