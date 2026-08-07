@@ -2,7 +2,7 @@ class TimelineEntry < ApplicationRecord
   include Sortable
 
   CATEGORIES = %w[experience education].freeze
-  MONTHS = Date::MONTHNAMES.each_with_index.filter_map { |name, index| [name, index] if name }.freeze
+  MONTHS = Date::MONTHNAMES.each_with_index.filter_map { |name, index| [ name, index ] if name }.freeze
 
   before_validation :append_to_category, on: :create
 
@@ -18,11 +18,11 @@ class TimelineEntry < ApplicationRecord
   def timeframe
     return "" unless start_year.present? || end_year.present? || current?
 
-    [formatted_start_date, formatted_end_date].compact.join(" - ")
+    [ formatted_start_date, formatted_end_date ].compact.join(" - ")
   end
 
   def meta_with_timeframe
-    [meta, timeframe.presence].compact.join(" / ")
+    [ meta, timeframe.presence ].compact.join(" / ")
   end
 
   private
@@ -40,7 +40,7 @@ class TimelineEntry < ApplicationRecord
   def formatted_date(month, year)
     return if year.blank?
 
-    [Date::MONTHNAMES[month.to_i], year].compact.join(" ")
+    [ Date::MONTHNAMES[month.to_i], year ].compact.join(" ")
   end
 
   def append_to_category

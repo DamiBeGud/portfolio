@@ -42,7 +42,7 @@ class CreatePortfolioContent < ActiveRecord::Migration[8.1]
       t.timestamps
     end
 
-    add_index :timeline_entries, [:category, :sort_order]
+    add_index :timeline_entries, [ :category, :sort_order ]
 
     create_table :info_cards do |t|
       t.string :title, null: false

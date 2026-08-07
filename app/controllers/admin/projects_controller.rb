@@ -1,6 +1,6 @@
 module Admin
   class ProjectsController < BaseController
-    before_action :set_project, only: [:edit, :update, :destroy, :move_higher, :move_lower]
+    before_action :set_project, only: [ :edit, :update, :destroy, :move_higher, :move_lower ]
 
     def index
       @settings = SiteSetting.current

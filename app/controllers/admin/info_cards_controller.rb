@@ -1,6 +1,6 @@
 module Admin
   class InfoCardsController < BaseController
-    before_action :set_info_card, only: [:edit, :update, :destroy]
+    before_action :set_info_card, only: [ :edit, :update, :destroy ]
 
     def index
       @info_cards = InfoCard.ordered

@@ -1,6 +1,6 @@
 module Admin
   class TimelineEntriesController < BaseController
-    before_action :set_timeline_entry, only: [:edit, :update, :destroy, :move_higher, :move_lower]
+    before_action :set_timeline_entry, only: [ :edit, :update, :destroy, :move_higher, :move_lower ]
 
     def index
       @timeline_entries = TimelineEntry.ordered

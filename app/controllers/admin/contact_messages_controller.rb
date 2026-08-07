@@ -1,6 +1,6 @@
 module Admin
   class ContactMessagesController < BaseController
-    before_action :set_message, only: [:show, :update]
+    before_action :set_message, only: [ :show, :update ]
 
     def index
       @messages = ContactMessage.ordered

@@ -34,6 +34,6 @@ class ContactMessageTest < ActiveSupport::TestCase
   end
 
   test "unviewed scope returns only unviewed messages" do
-    assert_equal [contact_messages(:one).id], ContactMessage.unviewed.pluck(:id)
+    assert_equal [ contact_messages(:one).id ], ContactMessage.unviewed.pluck(:id)
   end
 end

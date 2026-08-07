@@ -3,15 +3,15 @@ Rails.application.routes.draw do
 
   root "home#index"
 
-  resources :contact_messages, only: [:create]
+  resources :contact_messages, only: [ :create ]
 
   namespace :admin do
     root "sections#index"
-    resource :session, only: [:new, :create, :destroy]
-    resource :home_section, path: "home", only: [:edit, :update]
-    resource :about_section, path: "about", only: [:edit, :update]
-    resource :contact_section, path: "contact", only: [:edit, :update]
-    resource :settings, only: [:edit, :update] do
+    resource :session, only: [ :new, :create, :destroy ]
+    resource :home_section, path: "home", only: [ :edit, :update ]
+    resource :about_section, path: "about", only: [ :edit, :update ]
+    resource :contact_section, path: "contact", only: [ :edit, :update ]
+    resource :settings, only: [ :edit, :update ] do
       patch :reset_colors
       patch :reset_color
     end
@@ -26,6 +26,6 @@ Rails.application.routes.draw do
     end
     resources :info_cards, except: :show
     resources :contact_links, except: :show
-    resources :contact_messages, only: [:index, :show, :update]
+    resources :contact_messages, only: [ :index, :show, :update ]
   end
 end

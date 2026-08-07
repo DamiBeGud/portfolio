@@ -1,6 +1,6 @@
 module Admin
   class ContactLinksController < BaseController
-    before_action :set_contact_link, only: [:edit, :update, :destroy]
+    before_action :set_contact_link, only: [ :edit, :update, :destroy ]
 
     def index
       @contact_links = ContactLink.ordered
