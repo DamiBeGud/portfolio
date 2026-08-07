@@ -1,0 +1,13 @@
+<% messages.each do |message| %>
+  <tr class="<%= "is-unviewed" unless message.viewed? %>" data-message-row>
+    <td>
+      <div class="admin-message-status">
+        <span class="admin-badge <%= message.viewed? ? "admin-badge--done" : "admin-badge--pending" %>">Viewed</span>
+        <span class="admin-badge <%= message.responded? ? "admin-badge--done" : "admin-badge--pending" %>">Responded</span>
+      </div>
+    </td>
+    <td><%= link_to message.name, admin_contact_message_path(message), data: { turbo_frame: "message-detail" } %></td>
+    <td class="admin-message-email"><%= message.email %></td>
+    <td class="admin-message-date"><%= l message.created_at, format: :table %></td>
+  </tr>
+<% end %>

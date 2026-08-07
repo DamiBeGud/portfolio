@@ -1,0 +1,38 @@
+<section class="admin-title-row">
+  <div>
+    <p class="admin-kicker">Inbox</p>
+    <h1>Contact Messages</h1>
+  </div>
+  <div class="admin-title-actions">
+    <%= render "message_count" %>
+  </div>
+</section>
+
+<% if @messages.any? %>
+  <div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Received</th>
+        </tr>
+      </thead>
+      <tbody id="messages-table-body">
+        <%= render "messages_table_body", messages: @messages %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p class="admin-empty">No messages yet. Submitted contact forms will appear here.</p>
+<% end %>
+
+<div class="admin-modal" data-message-modal hidden>
+  <div class="admin-modal__panel admin-modal__panel--wide">
+    <turbo-frame id="message-detail"></turbo-frame>
+    <div class="admin-modal__actions">
+      <button type="button" class="admin-button admin-button--secondary" data-message-modal-close>Close</button>
+    </div>
+  </div>
+</div>

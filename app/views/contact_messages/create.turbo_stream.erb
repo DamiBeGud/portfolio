@@ -1,0 +1,12 @@
+<% if @message.errors.any? %>
+  <%= turbo_stream.replace "contact-form-status" do %>
+    <p class="contact-form-status contact-form-status--error" role="alert"><%= @message.errors.full_messages.to_sentence %></p>
+  <% end %>
+<% else %>
+  <%= turbo_stream.replace "contact-form" do %>
+    <div class="contact-form-success">
+      <p class="contact-form-status contact-form-status--success" role="status">Thanks, your message has been sent.</p>
+      <p class="contact-form-success__hint"><%= link_to "Send another message", root_path(anchor: "contact") %>.</p>
+    </div>
+  <% end %>
+<% end %>

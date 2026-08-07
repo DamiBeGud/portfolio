@@ -1,0 +1,13 @@
+one:
+  name: Ada Lovelace
+  email: ada@example.com
+  message: Hello, I love your work.
+  viewed: false
+  responded: false
+
+two:
+  name: Grace Hopper
+  email: grace@example.com
+  message: Let's collaborate on a project.
+  viewed: true
+  responded: true

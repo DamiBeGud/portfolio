@@ -164,11 +164,19 @@
       </div>
     </div>
 
-    <form class="contact-form" action="mailto:<%= @settings.contact_email %>" method="post" enctype="text/plain">
-      <label><span>Name</span><input name="name" autocomplete="name" required></label>
-      <label><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
-      <label><span>Message</span><textarea name="message" rows="5" required></textarea></label>
-      <button type="submit">Send Message</button>
-    </form>
+    <%= form_with model: (@message || ContactMessage.new), url: contact_messages_path, class: "contact-form", id: "contact-form" do |form| %>
+      <div id="contact-form-status" class="contact-form-status-slot">
+        <% if notice.present? %>
+          <p class="contact-form-status contact-form-status--success" role="status"><%= notice %></p>
+        <% end %>
+        <% if alert.present? %>
+          <p class="contact-form-status contact-form-status--error" role="alert"><%= alert %></p>
+        <% end %>
+      </div>
+      <label><span>Name</span><%= form.text_field :name, autocomplete: "name", required: true %></label>
+      <label><span>Email</span><%= form.email_field :email, autocomplete: "email", required: true %></label>
+      <label><span>Message</span><%= form.text_area :message, rows: 5, required: true %></label>
+      <%= form.button "Send Message", type: "submit" %>
+    <% end %>
   </section>
 </main>

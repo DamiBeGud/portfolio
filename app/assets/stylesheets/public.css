@@ -59,9 +59,22 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    linear-gradient(color-mix(in srgb, var(--black) 8%, transparent) var(--grid-line), transparent var(--grid-line)) 0 0 / 64px 64px,
-    linear-gradient(90deg, color-mix(in srgb, var(--black) 8%, transparent) var(--grid-line), transparent var(--grid-line)) 0 0 / 64px 64px,
-    radial-gradient(circle at 78% 8%, color-mix(in srgb, var(--black) 16%, transparent), transparent 24rem),
+    linear-gradient(
+        color-mix(in srgb, var(--black) 8%, transparent) var(--grid-line),
+        transparent var(--grid-line)
+      )
+      0 0 / 64px 64px,
+    linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--black) 8%, transparent) var(--grid-line),
+        transparent var(--grid-line)
+      )
+      0 0 / 64px 64px,
+    radial-gradient(
+      circle at 78% 8%,
+      color-mix(in srgb, var(--black) 16%, transparent),
+      transparent 24rem
+    ),
     var(--white);
   color: var(--black);
   font-family: "Space Grotesk", sans-serif;
@@ -70,7 +83,11 @@ body {
 
 body.no-background-pattern {
   background:
-    radial-gradient(circle at 78% 8%, color-mix(in srgb, var(--black) 16%, transparent), transparent 24rem),
+    radial-gradient(
+      circle at 78% 8%,
+      color-mix(in srgb, var(--black) 16%, transparent),
+      transparent 24rem
+    ),
     var(--white);
 }
 
@@ -124,8 +141,15 @@ select {
   z-index: -1;
   opacity: 0.34;
   background-image:
-    linear-gradient(color-mix(in srgb, var(--black) 7%, transparent) var(--grid-line), transparent var(--grid-line)),
-    linear-gradient(90deg, color-mix(in srgb, var(--black) 6%, transparent) var(--grid-line), transparent var(--grid-line));
+    linear-gradient(
+      color-mix(in srgb, var(--black) 7%, transparent) var(--grid-line),
+      transparent var(--grid-line)
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--black) 6%, transparent) var(--grid-line),
+      transparent var(--grid-line)
+    );
   background-size: 13px 13px;
 }
 
@@ -535,9 +559,7 @@ p {
   min-height: min(74vh, 44rem);
   padding: clamp(1rem, 2vw, 2rem);
   box-shadow: 0 2rem 5rem color-mix(in srgb, var(--black) 13%, transparent);
-  transform:
-    translateY(var(--project-y, 0))
-    rotate(var(--project-rotate, 0deg))
+  transform: translateY(var(--project-y, 0)) rotate(var(--project-rotate, 0deg))
     scale(var(--project-scale, 1));
   opacity: var(--project-opacity, 1);
   will-change: transform, opacity;
@@ -554,7 +576,11 @@ p {
   border: 1px solid var(--border-color);
   background:
     linear-gradient(135deg, var(--black) 0 34%, transparent 34% 100%),
-    repeating-linear-gradient(90deg, var(--grey-100) 0 var(--grid-line), transparent var(--grid-line) 24px),
+    repeating-linear-gradient(
+      90deg,
+      var(--grey-100) 0 var(--grid-line),
+      transparent var(--grid-line) 24px
+    ),
     var(--grey-50);
 }
 
@@ -696,6 +722,26 @@ p {
   cursor: pointer;
 }
 
+.contact-form-status {
+  grid-column: 1 / -1;
+  margin: 0;
+  border: 1px solid var(--border-color);
+  padding: 0.85rem 1rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+}
+
+.contact-form-status--success {
+  border-color: #2f7d55;
+  color: #2f7d55;
+}
+
+.contact-form-status--error {
+  border-color: #9c2f2f;
+  color: #9c2f2f;
+}
+
 @keyframes intro-rise {
   to {
     opacity: 1;
@@ -819,4 +865,26 @@ body.reduced-motion .page-panel,
 body.reduced-motion .reveal {
   opacity: 1;
   transform: none;
+}
+
+.contact-form-status-slot {
+  grid-column: 1 / -1;
+}
+
+.contact-form-status-slot:empty {
+  display: none;
+}
+
+.contact-form-success {
+  display: grid;
+  gap: 1rem;
+  max-width: 58rem;
+  margin-top: clamp(3rem, 7vw, 6rem);
+}
+
+.contact-form-success__hint {
+  margin: 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.82rem;
+  text-transform: uppercase;
 }

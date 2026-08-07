@@ -1,0 +1,5 @@
+<span id="admin-messages-count">
+  <% if ContactMessage.unviewed.count.positive? %>
+    <span class="admin-sidebar-count"><%= ContactMessage.unviewed.count %></span>
+  <% end %>
+</span>

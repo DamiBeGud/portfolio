@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root "home#index"
 
+  resources :contact_messages, only: [:create]
+
   namespace :admin do
     root "sections#index"
     resource :session, only: [:new, :create, :destroy]
@@ -24,5 +26,6 @@ Rails.application.routes.draw do
     end
     resources :info_cards, except: :show
     resources :contact_links, except: :show
+    resources :contact_messages, only: [:index, :show, :update]
   end
 end

@@ -1,0 +1,19 @@
+<turbo-frame id="message-detail">
+  <div class="admin-message-detail">
+    <p class="admin-kicker">Received <%= l message.created_at, format: :long %></p>
+    <h2><%= message.name %></h2>
+    <p class="admin-message-detail__meta">
+      <%= link_to message.email, "mailto:#{message.email}", class: "admin-inline-link" %>
+    </p>
+    <div class="admin-message-detail__status">
+      <span class="admin-badge <%= message.viewed? ? "admin-badge--done" : "admin-badge--pending" %>">Viewed</span>
+      <span class="admin-badge <%= message.responded? ? "admin-badge--done" : "admin-badge--pending" %>">Responded</span>
+    </div>
+    <div class="admin-message-detail__body"><%= simple_format message.message %></div>
+  </div>
+
+  <div class="admin-modal__actions">
+    <%= button_to message.viewed? ? "Mark as unviewed" : "Mark as viewed", admin_contact_message_path(message), method: :patch, params: { contact_message: { viewed: !message.viewed? } }, class: "admin-button admin-button--secondary" %>
+    <%= button_to message.responded? ? "Mark as unresponded" : "Mark as responded", admin_contact_message_path(message), method: :patch, params: { contact_message: { responded: !message.responded? } }, class: "admin-button" %>
+  </div>
+</turbo-frame>

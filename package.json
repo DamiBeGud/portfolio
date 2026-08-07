@@ -1,0 +1,11 @@
+{
+  "name": "portfolio",
+  "private": true,
+  "scripts": {
+    "format:css": "prettier --write \"app/assets/stylesheets/**/*.css\"",
+    "check:css": "prettier --check \"app/assets/stylesheets/**/*.css\""
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  }
+}
