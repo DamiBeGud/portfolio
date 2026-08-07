@@ -30,6 +30,9 @@
     <% if session[:admin_authenticated] %>
       <%= link_to "Admin", admin_root_path, class: "admin-return-link" %>
     <% end %>
+    <% if @settings.cv.attached? && @settings.show_cv_in_navbar? %>
+      <%= link_to @settings.cv_button_text, rails_blob_path(@settings.cv, disposition: "attachment"), class: "cv-download-link" %>
+    <% end %>
     <% if @settings.show_theme_toggle? %>
       <button class="theme-toggle" type="button" aria-label="Switch color mode">
         <span class="theme-toggle__label">Theme</span>
@@ -61,6 +64,9 @@
       <h1 id="hero-title"><%= @settings.hero_title %></h1>
       <p><%= @settings.hero_intro %></p>
       <p><%= @settings.hero_body %></p>
+      <% if @settings.cv.attached? && @settings.show_cv_in_hero? %>
+        <%= link_to @settings.cv_button_text, rails_blob_path(@settings.cv, disposition: "attachment"), class: "cv-download-link cv-download-link--hero" %>
+      <% end %>
     </div>
   </section>
 
@@ -68,7 +74,14 @@
     <div class="section-kicker"><%= @settings.about_kicker %></div>
     <div class="page-grid">
       <div><h2 id="about-title"><%= @settings.about_title %></h2></div>
-      <div class="copy-stack"><p><%= @settings.about_body %></p></div>
+      <div class="copy-stack">
+        <p><%= @settings.about_body %></p>
+        <% if @settings.cv.attached? && @settings.show_cv_in_about? %>
+          <div class="section-cv-row">
+            <%= link_to @settings.cv_button_text, rails_blob_path(@settings.cv, disposition: "attachment"), class: "cv-download-link" %>
+          </div>
+        <% end %>
+      </div>
     </div>
 
     <div class="timeline-grid" aria-label="Work experience and education">
@@ -160,6 +173,9 @@
         <%= mail_to @settings.contact_email %>
         <% @contact_links.each do |link| %>
           <%= link_to link.label, external_url(link.url), target: "_blank", rel: "noreferrer" %>
+        <% end %>
+        <% if @settings.cv.attached? && @settings.show_cv_in_contact? %>
+          <%= link_to @settings.cv_button_text, rails_blob_path(@settings.cv, disposition: "attachment"), class: "cv-download-link" %>
         <% end %>
       </div>
     </div>

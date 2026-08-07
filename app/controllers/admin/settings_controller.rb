@@ -31,6 +31,11 @@ module Admin
       redirect_to edit_admin_settings_path, notice: "#{color_field.humanize} reset to default."
     end
 
+    def remove_cv
+      SiteSetting.current.cv.purge
+      redirect_to edit_admin_settings_path, notice: "CV removed."
+    end
+
     private
 
     def settings_params
@@ -38,7 +43,9 @@ module Admin
         :show_animation_toggle, :show_theme_toggle, :theme_mode, :background_pattern,
         :light_grid_thickness, :dark_grid_thickness, :light_background, :light_text,
         :light_surface, :light_muted, :light_border, :dark_background,
-        :dark_text, :dark_surface, :dark_muted, :dark_border
+        :dark_text, :dark_surface, :dark_muted, :dark_border,
+        :show_cv_in_navbar, :show_cv_in_hero, :show_cv_in_about, :show_cv_in_contact,
+        :cv_button_text, :cv
       )
     end
   end

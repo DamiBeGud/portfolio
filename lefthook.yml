@@ -7,4 +7,4 @@ pre-commit:
     rubocop:
       # Runs RuboCop safe auto-correction on staged Ruby files only.
       # See bin/pre-commit-rubocop for the staged-file handling.
-      run: bin/pre-commit-rubocop
+      run: PATH="$HOME/.rbenv/shims:$PATH" bin/pre-commit-rubocop

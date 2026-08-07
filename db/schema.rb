@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_07_140000) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_07_150000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -95,6 +95,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_07_140000) do
     t.string "contact_kicker", default: "03 / Contact", null: false
     t.string "contact_title", null: false
     t.datetime "created_at", null: false
+    t.string "cv_button_text", default: "Download CV", null: false
     t.string "dark_background", default: "#050505", null: false
     t.string "dark_border", default: "#f8f8f5", null: false
     t.integer "dark_grid_thickness", default: 1, null: false
@@ -117,6 +118,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_07_140000) do
     t.string "projects_kicker", default: "02 / Projects", null: false
     t.string "projects_title", null: false
     t.boolean "show_animation_toggle", default: true, null: false
+    t.boolean "show_cv_in_about", default: true, null: false
+    t.boolean "show_cv_in_contact", default: true, null: false
+    t.boolean "show_cv_in_hero", default: false, null: false
+    t.boolean "show_cv_in_navbar", default: false, null: false
     t.boolean "show_theme_toggle", default: true, null: false
     t.string "theme_mode", default: "system", null: false
     t.datetime "updated_at", null: false

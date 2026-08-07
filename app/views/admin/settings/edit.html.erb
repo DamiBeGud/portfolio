@@ -60,4 +60,33 @@
       </div>
     <% end %>
   </fieldset>
+
+  <fieldset>
+    <legend>CV / Resume</legend>
+    <% if @settings.cv.attached? %>
+      <div class="admin-color-row">
+        <span><%= @settings.cv.filename %></span>
+        <%= button_tag "Remove CV", type: "button", class: "admin-button admin-button--secondary", data: { confirm_modal: "Remove the uploaded CV?", confirm_modal_url: remove_cv_admin_settings_path, confirm_modal_method: "delete" } %>
+      </div>
+    <% else %>
+      <label><span>Upload CV (PDF only)</span><%= form.file_field :cv, accept: "application/pdf" %></label>
+    <% end %>
+    <label><span>Button text</span><%= form.text_field :cv_button_text %></label>
+    <label class="admin-check">
+      <%= form.check_box :show_cv_in_navbar %>
+      <span>Header (right side)</span>
+    </label>
+    <label class="admin-check">
+      <%= form.check_box :show_cv_in_hero %>
+      <span>Hero section (right side)</span>
+    </label>
+    <label class="admin-check">
+      <%= form.check_box :show_cv_in_about %>
+      <span>About section (right side, above education &amp; experience)</span>
+    </label>
+    <label class="admin-check">
+      <%= form.check_box :show_cv_in_contact %>
+      <span>Contact page</span>
+    </label>
+  </fieldset>
 <% end %>

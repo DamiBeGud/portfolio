@@ -888,3 +888,36 @@ body.reduced-motion .reveal {
   font-size: 0.82rem;
   text-transform: uppercase;
 }
+
+a.cv-download-link {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  background: var(--black);
+  color: var(--white);
+  padding: 0.82rem 1rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+  pointer-events: auto;
+}
+
+a.cv-download-link:hover {
+  transform: translateY(-0.2rem);
+  background: var(--surface);
+  color: var(--black);
+}
+
+a.cv-download-link--hero {
+  margin-top: 1.5rem;
+}
+
+.section-cv-row {
+  margin-top: 1.5rem;
+}

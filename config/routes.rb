@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resource :settings, only: [ :edit, :update ] do
       patch :reset_colors
       patch :reset_color
+      delete :remove_cv
     end
     patch "projects/section", to: "projects#update_section", as: :projects_section
     resources :projects, except: :show do

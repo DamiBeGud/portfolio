@@ -1,6 +1,7 @@
 class SiteSetting < ApplicationRecord
   THEME_MODES = %w[system light dark].freeze
   GRID_THICKNESS_RANGE = 1..8
+  CV_DISPLAY_FIELDS = %w[show_cv_in_navbar show_cv_in_hero show_cv_in_about show_cv_in_contact].freeze
   DEFAULT_COLORS = {
     light_background: "#f8f8f5",
     light_text: "#050505",
@@ -15,10 +16,14 @@ class SiteSetting < ApplicationRecord
   }.freeze
   COLOR_FIELDS = DEFAULT_COLORS.keys.map(&:to_s).freeze
 
+  has_one_attached :cv
+
+  validate :cv_must_be_pdf
+
   validates :brand, :page_title, :meta_description, :hero_kicker, :hero_title, :hero_intro,
     :hero_body, :about_kicker, :about_title, :about_body, :projects_kicker,
     :projects_title, :projects_body, :contact_kicker, :contact_title,
-    :contact_email, presence: true
+    :contact_email, :cv_button_text, presence: true
   validates :theme_mode, inclusion: { in: THEME_MODES }
   validates :light_background, :light_text, :light_surface, :light_muted,
     :light_border, :dark_background, :dark_text, :dark_surface, :dark_muted,
@@ -37,6 +42,11 @@ class SiteSetting < ApplicationRecord
       background_pattern: true,
       light_grid_thickness: 1,
       dark_grid_thickness: 1,
+      show_cv_in_navbar: false,
+      show_cv_in_hero: true,
+      show_cv_in_about: false,
+      show_cv_in_contact: true,
+      cv_button_text: "Download CV",
       **DEFAULT_COLORS,
       hero_intro: "A software developer focused on building reliable, maintainable applications across the web stack.",
       hero_body: "I enjoy turning product ideas into practical software, with attention to clean architecture, readable code, performance, and user experience.",
@@ -46,5 +56,14 @@ class SiteSetting < ApplicationRecord
       projects_body: "These projects highlight practical problem-solving, full-stack development, thoughtful implementation, and the ability to turn requirements into working products.",
       contact_title: "Interested in working together or discussing a project?"
     }
+  end
+
+  private
+
+  def cv_must_be_pdf
+    return unless cv.attached?
+    return if cv.content_type == "application/pdf"
+
+    errors.add(:cv, "must be a PDF file")
   end
 end
