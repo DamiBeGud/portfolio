@@ -198,7 +198,7 @@ select {
   align-items: center;
   gap: 0.6rem;
   border: 1px solid var(--border-color);
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--surface);
   color: var(--black);
   padding: 0.65rem 0.85rem;
@@ -225,7 +225,8 @@ select {
   min-width: 2.5rem;
   min-height: 2.1rem;
   place-items: center;
-  border-radius: 999px;
+  padding: 0 0.45rem;
+  border-radius: 0.25rem;
   background: var(--black);
   color: var(--white);
 }
