@@ -1,0 +1,57 @@
+#!/usr/bin/env ruby
+# Pre-commit formatter: runs RuboCop safe auto-correction (-a) on staged Ruby files.
+#
+# Managed by Lefthook (see lefthook.yml). It only ever touches files that are
+# already staged for this commit, so unrelated unstaged work is never included:
+#
+#   - Fully staged Ruby files are auto-corrected with `bin/rubocop -a` and the
+#     corrected version is re-staged, so the formatted code is what gets committed.
+#   - Partially staged files (some hunks staged, some not) are checked without
+#     auto-correct, so unrelated unstaged changes are never swept into the commit.
+#   - If offenses remain after auto-correction, the commit is blocked with a
+#     clear message so the developer can review and stage the fixes.
+#
+# CI (bin/rubocop -f github) remains the final enforcement layer.
+
+require "fileutils"
+
+APP_ROOT = File.expand_path("..", __dir__)
+RUBY = RbConfig.ruby
+
+def git_lines(*args)
+  IO.popen(["git", *args], &:read).lines.map(&:strip).reject(&:empty?)
+end
+
+FileUtils.chdir(APP_ROOT) do
+  staged = git_lines("diff", "--cached", "--name-only", "--diff-filter=ACMR", "--", "*.rb")
+  exit 0 if staged.empty?
+
+  unstaged = git_lines("diff", "--name-only")
+  partially_staged = staged & unstaged
+  fully_staged = staged - partially_staged
+
+  ok = true
+
+  unless fully_staged.empty?
+    puts "== RuboCop: auto-correcting staged Ruby files =="
+    ok = system(RUBY, "bin/rubocop", "-a", "--force-exclusion", *fully_staged)
+
+    # Re-stage formatted files so the corrected version is what gets committed.
+    system("git", "add", "--", *fully_staged)
+  end
+
+  unless partially_staged.empty?
+    puts "== RuboCop: checking partially staged Ruby files (skipping auto-correct) =="
+    puts "Partially staged files (staged + unstaged changes): #{partially_staged.join(', ')}"
+    ok = system(RUBY, "bin/rubocop", "--force-exclusion", *partially_staged) && ok
+  end
+
+  unless ok
+    warn <<~MESSAGE
+
+      RuboCop found offenses that could not be auto-corrected (or a partially staged file failed the check).
+      Review the offenses above, fix them, and stage the corrected files with `git add` before committing again.
+    MESSAGE
+    exit 1
+  end
+end

@@ -41,6 +41,21 @@ POSTGRES_DB=portfolio_development
 POSTGRES_TEST_DB=portfolio_test
 ```
 
+## Code Formatting
+
+Ruby is formatted with [RuboCop](https://rubocop.org) (`rubocop-rails-omakase`), enforced by a [Lefthook](https://lefthook.dev) pre-commit hook and by CI (`bin/rubocop -f github`).
+
+On every `git commit`, `bin/pre-commit-rubocop` auto-corrects the staged `*.rb` files (`bin/rubocop -a`, safe fixes only), re-stages the corrected files, and blocks the commit with a message if any offenses remain. Partially staged files are only checked, never auto-corrected, so unrelated unstaged changes are never swept in.
+
+Enable the hooks once per clone:
+
+```sh
+npm install
+npm run hooks:install   # bin/setup does this automatically
+```
+
+Manual use: `bin/rubocop` (check), `bin/rubocop -a` (safe auto-correct). Emergency bypass: `git commit --no-verify` — CI will still fail on offenses, so use it sparingly.
+
 ## Editable Content
 
 The admin panel manages:

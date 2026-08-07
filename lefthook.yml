@@ -1,0 +1,10 @@
+# Lefthook git hooks — https://github.com/evilmartians/lefthook
+# Install with: npm run hooks:install  (or: npx lefthook install)
+min_version: 1.7.0
+
+pre-commit:
+  commands:
+    rubocop:
+      # Runs RuboCop safe auto-correction on staged Ruby files only.
+      # See bin/pre-commit-rubocop for the staged-file handling.
+      run: bin/pre-commit-rubocop

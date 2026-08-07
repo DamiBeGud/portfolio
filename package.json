@@ -3,9 +3,12 @@
   "private": true,
   "scripts": {
     "format:css": "prettier --write \"app/assets/stylesheets/**/*.css\"",
-    "check:css": "prettier --check \"app/assets/stylesheets/**/*.css\""
+    "check:css": "prettier --check \"app/assets/stylesheets/**/*.css\"",
+    "hooks:install": "lefthook install",
+    "hooks:uninstall": "lefthook uninstall"
   },
   "devDependencies": {
+    "lefthook": "^2.1.10",
     "prettier": "^3.6.2"
   }
 }
