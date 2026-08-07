@@ -15,7 +15,7 @@ class SiteSetting < ApplicationRecord
   }.freeze
   COLOR_FIELDS = DEFAULT_COLORS.keys.map(&:to_s).freeze
 
-  validates :brand, :page_title, :meta_description, :role, :hero_title, :hero_intro,
+  validates :brand, :page_title, :meta_description, :hero_kicker, :hero_title, :hero_intro,
     :hero_body, :about_kicker, :about_title, :about_body, :projects_kicker,
     :projects_title, :projects_body, :contact_kicker, :contact_title,
     :contact_email, presence: true

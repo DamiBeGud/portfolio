@@ -17,7 +17,7 @@ module Admin
     private
 
     def home_params
-      params.require(:site_setting).permit(:brand, :page_title, :meta_description, :role, :hero_title, :hero_intro, :hero_body)
+      params.require(:site_setting).permit(:brand, :page_title, :meta_description, :hero_kicker, :hero_title, :hero_intro, :hero_body)
     end
   end
 end

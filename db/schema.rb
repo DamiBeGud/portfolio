@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_07_130000) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_07_140000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -103,6 +103,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_07_130000) do
     t.string "dark_text", default: "#f8f8f5", null: false
     t.text "hero_body", null: false
     t.text "hero_intro", null: false
+    t.string "hero_kicker", default: "Software Developer", null: false
     t.string "hero_title", default: "Hi. I am Damjan Mlinaric", null: false
     t.string "light_background", default: "#f8f8f5", null: false
     t.string "light_border", default: "#050505", null: false
@@ -115,7 +116,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_07_130000) do
     t.text "projects_body", null: false
     t.string "projects_kicker", default: "02 / Projects", null: false
     t.string "projects_title", null: false
-    t.string "role", default: "Software Developer", null: false
     t.boolean "show_animation_toggle", default: true, null: false
     t.boolean "show_theme_toggle", default: true, null: false
     t.string "theme_mode", default: "system", null: false
