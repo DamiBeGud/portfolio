@@ -1,6 +1,30 @@
 # Editable Portfolio
 
-Rails portfolio website with a password-protected admin panel, custom CSS animation, editable colors, PostgreSQL, and ActiveStorage project image uploads.
+A bold, editable Rails portfolio with a password-protected admin panel, custom CSS animation, theme controls, PostgreSQL, and ActiveStorage project image uploads.
+
+<p>
+  <img src=".images/Screenshot%202026-08-11%20at%2010.28.28.png" alt="Portfolio home section in dark theme" width="100%">
+</p>
+
+<div style="display: flex; gap: 12px; overflow-x: auto; padding-bottom: 12px;">
+  <img src=".images/Screenshot%202026-08-11%20at%2010.28.34.png" alt="About section with experience headline" width="260">
+  <img src=".images/Screenshot%202026-08-11%20at%2010.28.46.png" alt="Projects section with layered project cards" width="260">
+  <img src=".images/Screenshot%202026-08-11%20at%2010.28.56.png" alt="Focused project card for Accessible Component Lab" width="260">
+  <img src=".images/Screenshot%202026-08-11%20at%2010.28.59.png" alt="Contact section with message form and social links" width="260">
+  <img src=".images/Screenshot%202026-08-11%20at%2010.29.08.png" alt="Project detail overlay modal" width="260">
+</div>
+
+## Preview
+
+This portfolio uses a high-contrast editorial layout, oversized navigation typography, a grid-based background system, and layered project cards to keep the public site visually direct while keeping the content fully manageable from Rails admin screens.
+
+## Highlights
+
+- Public portfolio with animated section navigation and light/dark theme support
+- Password-protected admin panel for editing site copy, projects, timeline entries, info cards, and contact links
+- Contact form backed by persisted messages and an admin review flow
+- ActiveStorage uploads for project images, with local disk storage by default
+- Docker-based local development stack with PostgreSQL
 
 ## Requirements
 
