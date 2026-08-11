@@ -2,21 +2,68 @@
 
 A bold, editable Rails portfolio with a password-protected admin panel, custom CSS animation, theme controls, PostgreSQL, and ActiveStorage project image uploads.
 
-<p>
-  <img src=".images/Screenshot%202026-08-11%20at%2010.28.28.png" alt="Portfolio home section in dark theme" width="100%">
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset=".images/light-home.png">
+    <source media="(prefers-color-scheme: dark)" srcset=".images/dark-home.png">
+    <img src=".images/dark-home.png" alt="Portfolio home section" width="900">
+  </picture>
 </p>
-
-<div style="display: flex; gap: 12px; overflow-x: auto; padding-bottom: 12px;">
-  <img src=".images/Screenshot%202026-08-11%20at%2010.28.34.png" alt="About section with experience headline" width="260">
-  <img src=".images/Screenshot%202026-08-11%20at%2010.28.46.png" alt="Projects section with layered project cards" width="260">
-  <img src=".images/Screenshot%202026-08-11%20at%2010.28.56.png" alt="Focused project card for Accessible Component Lab" width="260">
-  <img src=".images/Screenshot%202026-08-11%20at%2010.28.59.png" alt="Contact section with message form and social links" width="260">
-  <img src=".images/Screenshot%202026-08-11%20at%2010.29.08.png" alt="Project detail overlay modal" width="260">
-</div>
 
 ## Preview
 
 This portfolio uses a high-contrast editorial layout, oversized navigation typography, a grid-based background system, and layered project cards to keep the public site visually direct while keeping the content fully manageable from Rails admin screens.
+
+## Screenshots
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <picture>
+        <source media="(prefers-color-scheme: light)" srcset=".images/light-about.png">
+        <source media="(prefers-color-scheme: dark)" srcset=".images/dark-about.png">
+        <img src=".images/dark-about.png" alt="About section with experience headline" width="100%">
+      </picture>
+      <br>
+      <sub>About section with large editorial type and anchored navigation.</sub>
+    </td>
+    <td width="50%" align="center">
+      <picture>
+        <source media="(prefers-color-scheme: light)" srcset=".images/light-projects-overview.png">
+        <source media="(prefers-color-scheme: dark)" srcset=".images/dark-projects-overview.png">
+        <img src=".images/dark-projects-overview.png" alt="Projects section with layered project cards" width="100%">
+      </picture>
+      <br>
+      <sub>Projects overview with layered cards and technology tags.</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <picture>
+        <source media="(prefers-color-scheme: light)" srcset=".images/light-project-card.png">
+        <source media="(prefers-color-scheme: dark)" srcset=".images/dark-project-card.png">
+        <img src=".images/dark-project-card.png" alt="Focused project card for Accessible Component Lab" width="100%">
+      </picture>
+      <br>
+      <sub>Focused project card with live-site and source-code actions.</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src=".images/dark-contact.png" alt="Contact section with message form and social links" width="100%">
+      <br>
+      <sub>Contact section with social links and persisted message form.</sub>
+    </td>
+  </tr>
+</table>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset=".images/light-project-detail.png">
+    <source media="(prefers-color-scheme: dark)" srcset=".images/dark-project-detail.png">
+    <img src=".images/dark-project-detail.png" alt="Project detail overlay modal" width="700">
+  </picture>
+  <br>
+  <sub>Project detail overlay for deeper project context.</sub>
+</p>
 
 ## Highlights
 
