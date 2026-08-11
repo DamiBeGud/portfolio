@@ -48,7 +48,11 @@ This portfolio uses a high-contrast editorial layout, oversized navigation typog
       <sub>Focused project card with live-site and source-code actions.</sub>
     </td>
     <td width="50%" align="center">
-      <img src=".images/dark-contact.png" alt="Contact section with message form and social links" width="100%">
+      <picture>
+        <source media="(prefers-color-scheme: light)" srcset=".images/light-contact.png">
+        <source media="(prefers-color-scheme: dark)" srcset=".images/dark-contact.png">
+        <img src=".images/dark-contact.png" alt="Contact section with message form and social links" width="100%">
+      </picture>
       <br>
       <sub>Contact section with social links and persisted message form.</sub>
     </td>
